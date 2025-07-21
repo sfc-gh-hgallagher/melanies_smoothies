@@ -34,12 +34,14 @@ ingredients_list = st.multiselect(
 )
 
 if ingredients_list:
-    
     ingredients_string = ''
+  
     for fruit_chosen in ingredients_list:
        ingredients_string += fruit_chosen + ' '
-       if fruit_chosen[-1] == 's':
-         fruit_chosen = fruit_chosen[0:-1]
+
+       search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
+       st.write(f'The search value for {fruit_chosen} is {search-on}.')
+      
        smoothiefroot_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_chosen}")
        sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
